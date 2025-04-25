@@ -90,6 +90,9 @@ const MusicPlayer = () => {
       <div className="max-w-2xl mx-auto relative z-10">
         {/* Neon border animation wrapper */}
         <div className="neon-border-container relative rounded-xl overflow-hidden">
+          {/* The animated neon border */}
+          <div className="neon-border"></div>
+          
           {/* The actual card with glassmorphism effect */}
           <Card className="backdrop-blur-2xl bg-black/20 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.37)] p-6 rounded-xl relative z-10">
             <div className="space-y-6">
@@ -163,9 +166,6 @@ const MusicPlayer = () => {
               </div>
             </div>
           </Card>
-          
-          {/* Neon border effect elements */}
-          <div className="absolute inset-0 rounded-xl neon-border"></div>
         </div>
       </div>
     </div>

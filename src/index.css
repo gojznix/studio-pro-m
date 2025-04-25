@@ -101,11 +101,10 @@
   }
 }
 
-/* Neon border animation */
+/* Updated neon border animation */
 .neon-border-container {
   position: relative;
   z-index: 1;
-  box-shadow: 0 0 25px rgba(0, 255, 170, 0.4);
 }
 
 .neon-border {
@@ -113,27 +112,49 @@
   inset: -2px;
   z-index: 0;
   border-radius: inherit;
-  background: linear-gradient(
-    90deg,
-    #f0f 0%,
-    #0ff 20%,
-    #0f0 40%,
-    #ff0 60%,
-    #f00 80%,
-    #f0f 100%
-  );
-  background-size: 200% 100%;
-  animation: neon-border-animation 3s linear infinite;
-  filter: blur(8px);
-  opacity: 0.7;
+  background: transparent;
+  overflow: hidden;
 }
 
-@keyframes neon-border-animation {
+.neon-border::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    transparent,
+    rgba(0, 255, 255, 0.8),
+    rgba(0, 255, 255, 0.4),
+    transparent 30%,
+    transparent 40%,
+    rgba(120, 0, 255, 0.5),
+    rgba(120, 0, 255, 0.8),
+    transparent 70%,
+    transparent 80%, 
+    rgba(255, 0, 255, 0.8),
+    rgba(255, 0, 255, 0.4),
+    transparent
+  );
+  animation: neon-rotate 4s linear infinite;
+}
+
+.neon-border::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background: rgba(13, 31, 21, 0.3);
+  border-radius: inherit;
+  z-index: 2;
+}
+
+@keyframes neon-rotate {
   0% {
-    background-position: 0% 0%;
+    transform: rotate(0deg);
   }
   100% {
-    background-position: 200% 0%;
+    transform: rotate(360deg);
   }
 }
 
@@ -155,4 +176,3 @@
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
 }
-
