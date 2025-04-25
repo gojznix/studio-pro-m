@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -99,3 +100,59 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Neon border animation */
+.neon-border-container {
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 25px rgba(0, 255, 170, 0.4);
+}
+
+.neon-border {
+  position: absolute;
+  inset: -2px;
+  z-index: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    #f0f 0%,
+    #0ff 20%,
+    #0f0 40%,
+    #ff0 60%,
+    #f00 80%,
+    #f0f 100%
+  );
+  background-size: 200% 100%;
+  animation: neon-border-animation 3s linear infinite;
+  filter: blur(8px);
+  opacity: 0.7;
+}
+
+@keyframes neon-border-animation {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
+}
+
+/* Custom scrollbar for the song list */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
