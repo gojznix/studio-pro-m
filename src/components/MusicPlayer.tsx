@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Song } from "@/types/music";
 import { songs } from "@/data/songs";
@@ -13,7 +12,6 @@ const MusicPlayer = () => {
   const [backgroundPosition, setBackgroundPosition] = useState({ x: 0, y: 0 });
   const { toast } = useToast();
 
-  // Add background motion effect
   useEffect(() => {
     const interval = setInterval(() => {
       setBackgroundPosition(prev => ({
@@ -38,7 +36,6 @@ const MusicPlayer = () => {
     });
 
     if (eligibleSongs.length === 0) {
-      // If no songs were selected based on probability, pick a random song
       return songs[Math.floor(Math.random() * songs.length)];
     }
 
@@ -78,7 +75,6 @@ const MusicPlayer = () => {
         backgroundPosition: "center",
       }}
     >
-      {/* Animated background overlay */}
       <div 
         className="absolute inset-0 bg-[#0d1f15]/80 -z-10"
         style={{
@@ -88,13 +84,12 @@ const MusicPlayer = () => {
       ></div>
       
       <div className="max-w-2xl mx-auto relative z-10">
-        {/* Neon border animation wrapper */}
         <div className="neon-border-container relative rounded-xl overflow-hidden">
-          {/* The animated neon border */}
           <div className="neon-border"></div>
           
-          {/* The actual card with glassmorphism effect */}
-          <Card className="backdrop-blur-2xl bg-black/20 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.37)] p-6 rounded-xl relative z-10">
+          <Card className="backdrop-blur-3xl bg-black/30 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.37)] p-6 rounded-xl relative z-10 
+            before:absolute before:inset-0 before:bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWx0ZXI9InVybCgjYSkiIG9wYWNpdHk9IjAuMDUiLz48L3N2Zz4=')] 
+            before:bg-repeat before:opacity-20 before:mix-blend-overlay before:pointer-events-none">
             <div className="space-y-6">
               <div className="text-center space-y-3">
                 <h2 className="text-3xl font-bold bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent">
