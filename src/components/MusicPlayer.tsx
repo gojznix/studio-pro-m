@@ -183,14 +183,6 @@ const MusicPlayer = () => {
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2 space-y-6">
-                {/* Advertisement Banner */}
-                {currentContent && isAdvertisement(currentContent) && (
-                  <AdBanner 
-                    advertisement={currentContent as Advertisement} 
-                    timeRemaining={timeRemaining}
-                  />
-                )}
-
                 {/* Main Player */}
                 <div className="text-center space-y-3">
                   <h2 className="text-3xl font-bold bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent">
@@ -270,6 +262,14 @@ const MusicPlayer = () => {
                     <p className="text-2xl font-bold text-yellow-400">{getTotalAdPlays()}</p>
                   </div>
                 </div>
+
+                {/* Advertisement Banner - moved to bottom */}
+                {currentContent && isAdvertisement(currentContent) && (
+                  <AdBanner 
+                    advertisement={currentContent as Advertisement} 
+                    timeRemaining={timeRemaining}
+                  />
+                )}
               </div>
 
               {/* Sidebar */}
