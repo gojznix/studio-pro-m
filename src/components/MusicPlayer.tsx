@@ -161,7 +161,7 @@ const MusicPlayer = () => {
 
   return (
     <div 
-      className="min-h-screen p-8 bg-cover bg-center relative overflow-hidden"
+      className="min-h-screen p-4 bg-cover bg-center relative overflow-hidden"
       style={{
         backgroundImage: "url('https://source.unsplash.com/1600x900/?dark,forest,abstract')",
         backgroundPosition: "center",
@@ -175,11 +175,11 @@ const MusicPlayer = () => {
         }}
       ></div>
       
-      <div className="max-w-4xl mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto relative z-10">
         <div className="neon-border-container relative rounded-xl overflow-hidden">
           <div className="neon-border"></div>
           
-          <Card className="backdrop-blur-3xl bg-black/30 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.37)] p-6 rounded-xl relative z-10">
+          <Card className="backdrop-blur-3xl bg-black/30 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.37)] p-8 rounded-xl relative z-10 min-h-[85vh]">
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2 space-y-6">
