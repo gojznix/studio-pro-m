@@ -1,18 +1,20 @@
-
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Song, Advertisement } from "@/types/music";
-import { songs } from "@/data/songs";
-import { advertisements } from "@/data/advertisements";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Play, Pause, SkipBack, SkipForward, Radio } from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { getNextContent } from "@/utils/smartSelection";
 import { incrementSongPlay, incrementAdPlay, getPlayTracker } from "@/utils/playTracker";
+import AdBanner from "./AdBanner";
+import AutoPlayController from "./AutoPlayController";
+import ProgressIndicator from "./ProgressIndicator";
 
 const MusicPlayer = () => {
   const [currentContent, setCurrentContent] = useState<Song | Advertisement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+  const [timeRemaining, setTimeRemaining] = useState(0);
   const [backgroundPosition, setBackgroundPosition] = useState({ x: 0, y: 0 });
   const [playTracker, setPlayTracker] = useState(getPlayTracker());
   const { toast } = useToast();
@@ -28,7 +30,6 @@ const MusicPlayer = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Update play tracker every few seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setPlayTracker(getPlayTracker());
@@ -41,52 +42,111 @@ const MusicPlayer = () => {
     return 'brand' in content && 'magnitude' in content;
   };
 
-  const handlePlay = () => {
-    if (!currentContent) {
-      const content = getNextContent();
-      setCurrentContent(content);
-      
-      if (isAdvertisement(content)) {
-        incrementAdPlay(content.id);
-        toast({
-          title: "Advertisement",
-          description: `${content.title} by ${content.brand}`,
-        });
-      } else {
-        incrementSongPlay(content.id);
-        toast({
-          title: "Now Playing",
-          description: `${content.title} by ${content.artist}`,
-        });
-      }
-      setPlayTracker(getPlayTracker());
-    }
-    setIsPlaying(true);
-  };
-
-  const handlePause = () => {
-    setIsPlaying(false);
-  };
-
-  const handleNext = () => {
-    const content = getNextContent();
+  const playContent = useCallback((content: Song | Advertisement) => {
     setCurrentContent(content);
     
     if (isAdvertisement(content)) {
       incrementAdPlay(content.id);
+      setTimeRemaining(content.duration);
       toast({
         title: "Advertisement",
         description: `${content.title} by ${content.brand}`,
       });
     } else {
       incrementSongPlay(content.id);
+      setTimeRemaining(180); // Default 3 minutes for songs
       toast({
         title: "Now Playing",
         description: `${content.title} by ${content.artist}`,
       });
     }
+    
+    setIsPlaying(true);
     setPlayTracker(getPlayTracker());
+  }, [toast]);
+
+  const handleNext = useCallback(() => {
+    const content = getNextContent();
+    playContent(content);
+  }, [playContent]);
+
+  // Auto-play timer effect
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    
+    if (isPlaying && timeRemaining > 0) {
+      interval = setInterval(() => {
+        setTimeRemaining(prev => {
+          if (prev <= 1) {
+            if (isAutoPlaying) {
+              // Auto-advance to next content
+              setTimeout(() => handleNext(), 100);
+            } else {
+              setIsPlaying(false);
+            }
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isPlaying, timeRemaining, isAutoPlaying, handleNext]);
+
+  const handlePlay = () => {
+    if (!currentContent) {
+      handleNext();
+    } else {
+      setIsPlaying(true);
+    }
   };
+
+  const handlePause = () => {
+    setIsPlaying(false);
+  };
+
+  const handleToggleAutoPlay = () => {
+    setIsAutoPlaying(prev => {
+      const newValue = !prev;
+      if (newValue && !currentContent) {
+        // Start auto-play by playing first content
+        handleNext();
+      }
+      toast({
+        title: newValue ? "Auto-Play Started" : "Auto-Play Stopped",
+        description: newValue ? "Music will play continuously" : "Auto-advance disabled",
+      });
+      return newValue;
+    });
+  };
+
+  const handleRestart = () => {
+    setCurrentContent(null);
+    setIsPlaying(false);
+    setTimeRemaining(0);
+    if (isAutoPlaying) {
+      handleNext();
+    }
+    toast({
+      title: "Player Restarted",
+      description: "Starting fresh playlist",
+    });
+  };
+
+  // Auto-start when component mounts
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!currentContent) {
+        setIsAutoPlaying(true);
+        handleNext();
+      }
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   const getTotalSongPlays = () => {
     return Object.values(playTracker.songPlays).reduce((sum, plays) => sum + plays, 0);
@@ -116,26 +176,27 @@ const MusicPlayer = () => {
         <div className="neon-border-container relative rounded-xl overflow-hidden">
           <div className="neon-border"></div>
           
-          <Card className="backdrop-blur-3xl bg-black/30 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.37)] p-6 rounded-xl relative z-10 
-            before:absolute before:inset-0 before:bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWx0ZXI9InVybCgjYSkiIG9wYWNpdHk9IjAuMDUiLz48L3N2Zz4=')] 
-            before:bg-repeat before:opacity-20 before:mix-blend-overlay before:pointer-events-none">
+          <Card className="backdrop-blur-3xl bg-black/30 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.37)] p-6 rounded-xl relative z-10">
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* Main Player */}
               <div className="lg:col-span-2 space-y-6">
+                {/* Advertisement Banner */}
+                {currentContent && isAdvertisement(currentContent) && (
+                  <AdBanner 
+                    advertisement={currentContent as Advertisement} 
+                    timeRemaining={timeRemaining}
+                  />
+                )}
+
+                {/* Main Player */}
                 <div className="text-center space-y-3">
-                  <div className="flex items-center justify-center space-x-2 mb-2">
-                    {currentContent && isAdvertisement(currentContent) && (
-                      <Radio className="h-5 w-5 text-yellow-400" />
-                    )}
-                    <h2 className="text-3xl font-bold bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent">
-                      {currentContent ? currentContent.title : "Select a song"}
-                    </h2>
-                  </div>
+                  <h2 className="text-3xl font-bold bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent">
+                    {currentContent ? currentContent.title : "Auto-Playing Music"}
+                  </h2>
                   <p className="text-white/90 text-lg">
                     {currentContent ? 
                       (isAdvertisement(currentContent) ? currentContent.brand : currentContent.artist) 
-                      : "---"}
+                      : "Loading next track..."}
                   </p>
                   {currentContent && !isAdvertisement(currentContent) && (
                     <div className="flex items-center justify-center space-x-2 mt-1">
@@ -143,14 +204,18 @@ const MusicPlayer = () => {
                       <span className="text-white font-bold">{currentContent.rating.toFixed(1)}</span>
                     </div>
                   )}
-                  {currentContent && isAdvertisement(currentContent) && (
-                    <div className="flex items-center justify-center space-x-2 mt-1">
-                      <span className="text-blue-400 font-medium">Duration:</span>
-                      <span className="text-white font-bold">{currentContent.duration}s</span>
-                    </div>
-                  )}
                 </div>
 
+                {/* Progress Indicator */}
+                {currentContent && (
+                  <ProgressIndicator 
+                    currentContent={currentContent}
+                    timeRemaining={timeRemaining}
+                    isAdvertisement={isAdvertisement(currentContent)}
+                  />
+                )}
+
+                {/* Player Controls */}
                 <div className="flex items-center justify-center space-x-6 py-2">
                   <Button
                     variant="outline"
@@ -184,6 +249,13 @@ const MusicPlayer = () => {
                   </Button>
                 </div>
 
+                {/* Auto-Play Controls */}
+                <AutoPlayController 
+                  isAutoPlaying={isAutoPlaying}
+                  onToggleAutoPlay={handleToggleAutoPlay}
+                  onRestart={handleRestart}
+                />
+
                 {/* Play Statistics */}
                 <div className="grid grid-cols-2 gap-4 mt-6">
                   <div className="text-center p-4 rounded-lg bg-white/10 border border-white/20">
@@ -197,9 +269,24 @@ const MusicPlayer = () => {
                 </div>
               </div>
 
-              {/* Sidebar with Songs and Ads */}
+              {/* Sidebar */}
               <div className="space-y-6">
-                {/* Advertisement Status */}
+                {/* Auto-Play Status */}
+                <div className="text-center p-4 rounded-lg bg-white/10 border border-white/20">
+                  <h3 className="text-white/90 font-medium mb-2">Auto-Play Status</h3>
+                  <div className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full ${
+                    isAutoPlaying ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'
+                  }`}>
+                    <div className={`w-2 h-2 rounded-full ${
+                      isAutoPlaying ? 'bg-green-400 animate-pulse' : 'bg-red-400'
+                    }`}></div>
+                    <span className="text-sm font-medium">
+                      {isAutoPlaying ? 'Active' : 'Inactive'}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Advertisement Status - keep existing code */}
                 <div className="space-y-2">
                   <h3 className="text-xl font-semibold text-white/90">Ad Performance</h3>
                   <div className="max-h-[200px] overflow-y-auto pr-1 scrollbar-thin space-y-2">
@@ -227,7 +314,7 @@ const MusicPlayer = () => {
                   </div>
                 </div>
 
-                {/* Top Songs */}
+                {/* Top Songs - keep existing code */}
                 <div className="space-y-2">
                   <h3 className="text-xl font-semibold text-white/90">Top Songs</h3>
                   <div className="max-h-[320px] overflow-y-auto pr-1 scrollbar-thin">

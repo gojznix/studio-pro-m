@@ -8,7 +8,8 @@ export const advertisements: Advertisement[] = [
     brand: "TechGear",
     duration: 30,
     magnitude: 50, // 50 plays per 24 hours
-    audioUrl: "https://example.com/ad1.mp3"
+    audioUrl: "https://example.com/ad1.mp3",
+    bannerUrl: "https://source.unsplash.com/800x200/?headphones,technology"
   },
   {
     id: "ad2",
@@ -16,7 +17,8 @@ export const advertisements: Advertisement[] = [
     brand: "StreamPlus",
     duration: 25,
     magnitude: 75, // 75 plays per 24 hours
-    audioUrl: "https://example.com/ad2.mp3"
+    audioUrl: "https://example.com/ad2.mp3",
+    bannerUrl: "https://source.unsplash.com/800x200/?streaming,premium"
   },
   {
     id: "ad3",
@@ -24,7 +26,8 @@ export const advertisements: Advertisement[] = [
     brand: "FreshBrew",
     duration: 20,
     magnitude: 30, // 30 plays per 24 hours
-    audioUrl: "https://example.com/ad3.mp3"
+    audioUrl: "https://example.com/ad3.mp3",
+    bannerUrl: "https://source.unsplash.com/800x200/?coffee,fresh"
   },
   {
     id: "ad4",
@@ -32,7 +35,8 @@ export const advertisements: Advertisement[] = [
     brand: "SportMax",
     duration: 35,
     magnitude: 60, // 60 plays per 24 hours
-    audioUrl: "https://example.com/ad4.mp3"
+    audioUrl: "https://example.com/ad4.mp3",
+    bannerUrl: "https://source.unsplash.com/800x200/?energy,sports"
   },
   {
     id: "ad5",
@@ -40,6 +44,7 @@ export const advertisements: Advertisement[] = [
     brand: "CloudSync",
     duration: 28,
     magnitude: 40, // 40 plays per 24 hours
-    audioUrl: "https://example.com/ad5.mp3"
+    audioUrl: "https://example.com/ad5.mp3",
+    bannerUrl: "https://source.unsplash.com/800x200/?cloud,storage"
   }
 ];

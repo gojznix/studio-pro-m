@@ -14,6 +14,7 @@ export interface Advertisement {
   duration: number; // in seconds
   magnitude: number; // target plays per 24 hours
   audioUrl: string;
+  bannerUrl: string;
 }
 
 export interface PlayTracker {
