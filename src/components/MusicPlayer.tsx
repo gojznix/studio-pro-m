@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useCallback } from "react";
 import { Song, Advertisement } from "@/types/music";
 import { Button } from "@/components/ui/button";
@@ -6,6 +7,8 @@ import { Play, Pause, SkipBack, SkipForward } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { getNextContent } from "@/utils/smartSelection";
 import { incrementSongPlay, incrementAdPlay, getPlayTracker } from "@/utils/playTracker";
+import { songs } from "@/data/songs";
+import { advertisements } from "@/data/advertisements";
 import AdBanner from "./AdBanner";
 import AutoPlayController from "./AutoPlayController";
 import ProgressIndicator from "./ProgressIndicator";
