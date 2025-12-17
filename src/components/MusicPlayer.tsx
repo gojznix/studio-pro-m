@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback } from "react";
 import { Song, Advertisement } from "@/types/music";
 import { Card } from "@/components/ui/card";
@@ -24,12 +23,12 @@ const MusicPlayer = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setBackgroundPosition(prev => ({
+      setBackgroundPosition((prev) => ({
         x: prev.x + 0.3,
-        y: prev.y + 0.2
+        y: prev.y + 0.2,
       }));
     }, 50);
-    
+
     return () => clearInterval(interval);
   }, []);
 
@@ -37,36 +36,39 @@ const MusicPlayer = () => {
     const interval = setInterval(() => {
       setPlayTracker(getPlayTracker());
     }, 5000);
-    
+
     return () => clearInterval(interval);
   }, []);
 
   const isAdvertisement = (content: Song | Advertisement): content is Advertisement => {
-    return 'brand' in content && 'magnitude' in content;
+    return "brand" in content && "magnitude" in content;
   };
 
-  const playContent = useCallback((content: Song | Advertisement) => {
-    setCurrentContent(content);
-    
-    if (isAdvertisement(content)) {
-      incrementAdPlay(content.id);
-      setTimeRemaining(content.duration);
-      toast({
-        title: "Advertisement",
-        description: `${content.title} by ${content.brand}`,
-      });
-    } else {
-      incrementSongPlay(content.id);
-      setTimeRemaining(180); // Default 3 minutes for songs
-      toast({
-        title: "Now Playing",
-        description: `${content.title} by ${content.artist}`,
-      });
-    }
-    
-    setIsPlaying(true);
-    setPlayTracker(getPlayTracker());
-  }, [toast]);
+  const playContent = useCallback(
+    (content: Song | Advertisement) => {
+      setCurrentContent(content);
+
+      if (isAdvertisement(content)) {
+        incrementAdPlay(content.id);
+        setTimeRemaining(content.duration);
+        toast({
+          title: "Sponzorirana vsebina",
+          description: `${content.title} od ${content.brand}`,
+        });
+      } else {
+        incrementSongPlay(content.id);
+        setTimeRemaining(180); // Default 3 minutes for songs
+        toast({
+          title: "Trenutno predvajano:",
+          description: `${content.title} od ${content.artist}`,
+        });
+      }
+
+      setIsPlaying(true);
+      setPlayTracker(getPlayTracker());
+    },
+    [toast],
+  );
 
   const handleNext = useCallback(() => {
     const content = getNextContent();
@@ -76,10 +78,10 @@ const MusicPlayer = () => {
   // Auto-play timer effect
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    
+
     if (isPlaying && timeRemaining > 0) {
       interval = setInterval(() => {
-        setTimeRemaining(prev => {
+        setTimeRemaining((prev) => {
           if (prev <= 1) {
             if (isAutoPlaying) {
               // Auto-advance to next content
@@ -93,7 +95,7 @@ const MusicPlayer = () => {
         });
       }, 1000);
     }
-    
+
     return () => {
       if (interval) clearInterval(interval);
     };
@@ -112,15 +114,15 @@ const MusicPlayer = () => {
   };
 
   const handleToggleAutoPlay = () => {
-    setIsAutoPlaying(prev => {
+    setIsAutoPlaying((prev) => {
       const newValue = !prev;
       if (newValue && !currentContent) {
         // Start auto-play by playing first content
         handleNext();
       }
       toast({
-        title: newValue ? "Auto-Play Started" : "Auto-Play Stopped",
-        description: newValue ? "Music will play continuously" : "Auto-advance disabled",
+        title: newValue ? "Samodejno predvajanje - Zagnano" : "Samodejno predvajanje - Ustavljeno",
+        description: newValue ? "Glasba se bo predvajala nemoteno" : "Izklopi samodejno nadaljevanje",
       });
       return newValue;
     });
@@ -134,8 +136,8 @@ const MusicPlayer = () => {
       handleNext();
     }
     toast({
-      title: "Player Restarted",
-      description: "Starting fresh playlist",
+      title: "Predvajalnik se je znova zagnal",
+      description: "Začenjamo s svežo playlisto",
     });
   };
 
@@ -147,7 +149,7 @@ const MusicPlayer = () => {
         handleNext();
       }
     }, 1000);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -160,38 +162,37 @@ const MusicPlayer = () => {
   };
 
   return (
-    <div 
+    <div
       className="min-h-screen p-4 bg-cover bg-center relative overflow-hidden"
       style={{
         backgroundImage: "url('https://source.unsplash.com/1600x900/?dark,forest,abstract')",
         backgroundPosition: "center",
       }}
     >
-      <div 
+      <div
         className="absolute inset-0 bg-[#0d1f15]/80 -z-10"
         style={{
           backgroundImage: `radial-gradient(circle at ${backgroundPosition.x % 100}% ${backgroundPosition.y % 100}%, rgba(16, 65, 47, 0.6) 0%, rgba(8, 24, 19, 0.8) 70%)`,
           transition: "background-position 0.5s ease",
         }}
       ></div>
-      
+
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="neon-border-container relative rounded-xl overflow-hidden">
           <div className="neon-border"></div>
-          
+
           <Card className="backdrop-blur-3xl bg-black/30 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.37)] p-8 rounded-xl relative z-10 min-h-[85vh]">
-            
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2 space-y-6">
                 {/* Main Player */}
-                <PlayerHeader 
+                <PlayerHeader
                   currentContent={currentContent}
                   isAdvertisement={currentContent ? isAdvertisement(currentContent) : false}
                 />
 
                 {/* Progress Indicator */}
                 {currentContent && (
-                  <ProgressIndicator 
+                  <ProgressIndicator
                     currentContent={currentContent}
                     timeRemaining={timeRemaining}
                     isAdvertisement={isAdvertisement(currentContent)}
@@ -199,40 +200,26 @@ const MusicPlayer = () => {
                 )}
 
                 {/* Player Controls */}
-                <PlayerControls 
-                  isPlaying={isPlaying}
-                  onPlay={handlePlay}
-                  onPause={handlePause}
-                  onNext={handleNext}
-                />
+                <PlayerControls isPlaying={isPlaying} onPlay={handlePlay} onPause={handlePause} onNext={handleNext} />
 
                 {/* Auto-Play Controls */}
-                <AutoPlayController 
+                <AutoPlayController
                   isAutoPlaying={isAutoPlaying}
                   onToggleAutoPlay={handleToggleAutoPlay}
                   onRestart={handleRestart}
                 />
 
                 {/* Play Statistics */}
-                <PlayStatistics 
-                  totalSongPlays={getTotalSongPlays()}
-                  totalAdPlays={getTotalAdPlays()}
-                />
+                <PlayStatistics totalSongPlays={getTotalSongPlays()} totalAdPlays={getTotalAdPlays()} />
 
                 {/* Advertisement Banner - moved to bottom */}
                 {currentContent && isAdvertisement(currentContent) && (
-                  <AdBanner 
-                    advertisement={currentContent as Advertisement} 
-                    timeRemaining={timeRemaining}
-                  />
+                  <AdBanner advertisement={currentContent as Advertisement} timeRemaining={timeRemaining} />
                 )}
               </div>
 
               {/* Sidebar */}
-              <PlayerSidebar 
-                isAutoPlaying={isAutoPlaying}
-                playTracker={playTracker}
-              />
+              <PlayerSidebar isAutoPlaying={isAutoPlaying} playTracker={playTracker} />
             </div>
           </Card>
         </div>
