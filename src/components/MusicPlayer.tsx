@@ -189,7 +189,7 @@ const MusicPlayer = () => {
               <div className="w-full max-w-md h-px bg-zinc-700/50 mt-6 mb-[50px]" />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
               <div className="lg:col-span-2 space-y-6">
                 {/* Main Player */}
                 <PlayerHeader
