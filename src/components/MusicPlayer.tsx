@@ -120,6 +120,9 @@ const MusicPlayer = () => {
       if (newValue && !currentContent) {
         // Start auto-play by playing first content
         handleNext();
+      } else if (!newValue) {
+        // Stop playback when stopping auto-play
+        setIsPlaying(false);
       }
       toast({
         title: newValue ? "Samodejno predvajanje - Zagnano" : "Samodejno predvajanje - Ustavljeno",
