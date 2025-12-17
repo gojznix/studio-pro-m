@@ -11,6 +11,7 @@ import PlayerControls from "./PlayerControls";
 import PlayStatistics from "./PlayStatistics";
 import PlayerSidebar from "./PlayerSidebar";
 import PlayerHeader from "./PlayerHeader";
+import Footer from "./Footer";
 import studioLogo from "@/assets/studio-logo.png";
 
 const MusicPlayer = () => {
@@ -235,6 +236,9 @@ const MusicPlayer = () => {
               {/* Sidebar */}
               <PlayerSidebar isAutoPlaying={isAutoPlaying} playTracker={playTracker} />
             </div>
+
+            {/* Footer */}
+            <Footer />
           </Card>
         </div>
       </div>
