@@ -1,17 +1,16 @@
 import { Advertisement } from "@/types/music";
 import { Card } from "@/components/ui/card";
 import { Radio } from "lucide-react";
-
 interface AdBannerProps {
   advertisement: Advertisement;
   timeRemaining: number;
 }
-
-const AdBanner = ({ advertisement, timeRemaining }: AdBannerProps) => {
-  const progress = ((advertisement.duration - timeRemaining) / advertisement.duration) * 100;
-
-  return (
-    <Card className="backdrop-blur-3xl bg-gradient-to-r from-green-900/30 to-emerald-800/30 border border-green-500/30 shadow-[0_8px_32px_rgba(34,197,94,0.2)] p-4 rounded-xl relative overflow-hidden">
+const AdBanner = ({
+  advertisement,
+  timeRemaining
+}: AdBannerProps) => {
+  const progress = (advertisement.duration - timeRemaining) / advertisement.duration * 100;
+  return <Card className="backdrop-blur-3xl bg-gradient-to-r from-green-900/30 to-emerald-800/30 border shadow-[0_8px_32px_rgba(34,197,94,0.2)] p-4 rounded-xl relative overflow-hidden opacity-100 border-green-500 bg-primary">
       <div className="absolute inset-0 bg-gradient-to-r from-green-600/10 to-emerald-600/10 animate-pulse"></div>
 
       <div className="relative z-10 flex items-center justify-between">
@@ -29,10 +28,9 @@ const AdBanner = ({ advertisement, timeRemaining }: AdBannerProps) => {
         <div className="text-right">
           <div className="text-white/90 text-sm">{timeRemaining}s do konca</div>
           <div className="w-32 bg-white/20 rounded-full h-2 mt-1">
-            <div
-              className="bg-green-400 h-2 rounded-full transition-all duration-1000"
-              style={{ width: `${progress}%` }}
-            ></div>
+            <div className="bg-green-400 h-2 rounded-full transition-all duration-1000" style={{
+            width: `${progress}%`
+          }}></div>
           </div>
         </div>
       </div>
@@ -46,8 +44,6 @@ const AdBanner = ({ advertisement, timeRemaining }: AdBannerProps) => {
           </div>
         </div>
       </div>
-    </Card>
-  );
+    </Card>;
 };
-
 export default AdBanner;
