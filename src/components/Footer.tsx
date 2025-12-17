@@ -11,7 +11,7 @@ const Footer = () => {
           className="h-10 object-contain opacity-70" 
         />
         <div className="flex items-center gap-2">
-          <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/30">
+          <Badge className="bg-green-500/20 text-green-400 border border-green-500/50 shrink-0">
             v0.1.0
           </Badge>
           <p className="text-zinc-400 text-sm max-w-md">
