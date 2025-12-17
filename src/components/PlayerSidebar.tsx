@@ -70,7 +70,7 @@ const PlayerSidebar = ({ isAutoPlaying, playTracker }: PlayerSidebarProps) => {
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="text-center">
-                      <span className="text-white/60 text-xs block">Predvajanj:</span>
+                      <span className="text-white/60 text-xs block">Plays</span>
                       <span className="text-white font-bold">{plays}</span>
                     </div>
                     <div className="flex items-center space-x-1 bg-black/30 px-2 py-1 rounded-full">
