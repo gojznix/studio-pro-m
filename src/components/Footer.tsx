@@ -1,4 +1,5 @@
 import studioLogo from "@/assets/studio-logo.png";
+import { Badge } from "@/components/ui/badge";
 
 const Footer = () => {
   return (
@@ -9,9 +10,14 @@ const Footer = () => {
           alt="Studio Pro M" 
           className="h-10 object-contain opacity-70" 
         />
-        <p className="text-zinc-400 text-sm max-w-md">
-          Program je v BETA verziji in je v fazi testiranja. Dostopen je samo na tej povezavi. URL ni nikjer drugje objavljen.
-        </p>
+        <div className="flex items-center gap-2">
+          <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/30">
+            v0.1.0
+          </Badge>
+          <p className="text-zinc-400 text-sm max-w-md">
+            Program je v BETA verziji in je v fazi testiranja. Dostopen je samo na tej povezavi. URL ni nikjer drugje objavljen.
+          </p>
+        </div>
       </div>
     </footer>
   );
