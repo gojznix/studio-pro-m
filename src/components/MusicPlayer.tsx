@@ -186,7 +186,7 @@ const MusicPlayer = () => {
         <div className="neon-border-container relative rounded-xl overflow-hidden">
           <div className="neon-border"></div>
 
-          <Card className="bg-gradient-to-br from-zinc-900 via-neutral-900 to-stone-950 border border-zinc-700/50 shadow-2xl p-8 rounded-xl relative z-10 min-h-[85vh]">
+          <Card className="bg-gradient-to-br from-zinc-900 via-neutral-900 to-stone-950 border border-zinc-700/50 shadow-2xl p-8 rounded-xl relative z-10 min-h-[85vh] flex flex-col">
             {/* Logo */}
             <div className="flex flex-col items-center">
               <img 
