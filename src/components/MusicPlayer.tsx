@@ -181,7 +181,7 @@ const MusicPlayer = () => {
         <div className="neon-border-container relative rounded-xl overflow-hidden">
           <div className="neon-border"></div>
 
-          <Card className="backdrop-blur-3xl bg-black/30 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.37)] p-8 rounded-xl relative z-10 min-h-[85vh]">
+          <Card className="bg-white border border-gray-200 shadow-lg p-8 rounded-xl relative z-10 min-h-[85vh]">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2 space-y-6">
                 {/* Main Player */}
