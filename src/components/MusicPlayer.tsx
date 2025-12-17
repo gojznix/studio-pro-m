@@ -11,6 +11,7 @@ import PlayerControls from "./PlayerControls";
 import PlayStatistics from "./PlayStatistics";
 import PlayerSidebar from "./PlayerSidebar";
 import PlayerHeader from "./PlayerHeader";
+import studioLogo from "@/assets/studio-logo.png";
 
 const MusicPlayer = () => {
   const [currentContent, setCurrentContent] = useState<Song | Advertisement | null>(null);
@@ -182,6 +183,11 @@ const MusicPlayer = () => {
           <div className="neon-border"></div>
 
           <Card className="bg-gradient-to-br from-zinc-900 via-neutral-900 to-stone-950 border border-zinc-700/50 shadow-2xl p-8 rounded-xl relative z-10 min-h-[85vh]">
+            {/* Logo */}
+            <div className="flex justify-center mb-6">
+              <img src={studioLogo} alt="Studio Pro M" className="h-16 object-contain" />
+            </div>
+
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2 space-y-6">
                 {/* Main Player */}
