@@ -216,5 +216,355 @@ export const songs: Song[] = [
     artist: "Unfinished Business",
     rating: 4.1,
     audioUrl: "https://example.com/song30.mp3"
+  },
+  {
+    id: "31",
+    title: "Velvet Sky",
+    artist: "Dream Catcher",
+    rating: 7.4,
+    audioUrl: "https://example.com/song31.mp3"
+  },
+  {
+    id: "32",
+    title: "Quantum Leap",
+    artist: "Particle Wave",
+    rating: 8.2,
+    audioUrl: "https://example.com/song32.mp3"
+  },
+  {
+    id: "33",
+    title: "Rustic Charm",
+    artist: "Country Folk",
+    rating: 5.9,
+    audioUrl: "https://example.com/song33.mp3"
+  },
+  {
+    id: "34",
+    title: "Neon Paradise",
+    artist: "Synth Lords",
+    rating: 9.1,
+    audioUrl: "https://example.com/song34.mp3"
+  },
+  {
+    id: "35",
+    title: "Whispered Secrets",
+    artist: "Midnight Tales",
+    rating: 6.3,
+    audioUrl: "https://example.com/song35.mp3"
+  },
+  {
+    id: "36",
+    title: "Steel Horizon",
+    artist: "Metal Dreams",
+    rating: 7.8,
+    audioUrl: "https://example.com/song36.mp3"
+  },
+  {
+    id: "37",
+    title: "Tropical Storm",
+    artist: "Island Beats",
+    rating: 8.5,
+    audioUrl: "https://example.com/song37.mp3"
+  },
+  {
+    id: "38",
+    title: "Broken Mirror",
+    artist: "Shattered Glass",
+    rating: 4.7,
+    audioUrl: "https://example.com/song38.mp3"
+  },
+  {
+    id: "39",
+    title: "Crystal Waters",
+    artist: "Pure Flow",
+    rating: 8.9,
+    audioUrl: "https://example.com/song39.mp3"
+  },
+  {
+    id: "40",
+    title: "Shadow Dance",
+    artist: "Dark Motion",
+    rating: 7.1,
+    audioUrl: "https://example.com/song40.mp3"
+  },
+  {
+    id: "41",
+    title: "Ember Glow",
+    artist: "Fire Starters",
+    rating: 6.8,
+    audioUrl: "https://example.com/song41.mp3"
+  },
+  {
+    id: "42",
+    title: "Silent Echo",
+    artist: "Void Space",
+    rating: 5.4,
+    audioUrl: "https://example.com/song42.mp3"
+  },
+  {
+    id: "43",
+    title: "Sunrise Melody",
+    artist: "Dawn Chorus",
+    rating: 9.3,
+    audioUrl: "https://example.com/song43.mp3"
+  },
+  {
+    id: "44",
+    title: "Thunder Roll",
+    artist: "Storm Chasers",
+    rating: 7.6,
+    audioUrl: "https://example.com/song44.mp3"
+  },
+  {
+    id: "45",
+    title: "Frozen Heart",
+    artist: "Ice Queen",
+    rating: 6.2,
+    audioUrl: "https://example.com/song45.mp3"
+  },
+  {
+    id: "46",
+    title: "Wild Safari",
+    artist: "Jungle Rhythm",
+    rating: 8.0,
+    audioUrl: "https://example.com/song46.mp3"
+  },
+  {
+    id: "47",
+    title: "Cosmic Dust",
+    artist: "Galaxy Riders",
+    rating: 7.9,
+    audioUrl: "https://example.com/song47.mp3"
+  },
+  {
+    id: "48",
+    title: "Lonely Road",
+    artist: "Highway Blues",
+    rating: 5.1,
+    audioUrl: "https://example.com/song48.mp3"
+  },
+  {
+    id: "49",
+    title: "Electric Pulse",
+    artist: "Circuit Breaker",
+    rating: 8.4,
+    audioUrl: "https://example.com/song49.mp3"
+  },
+  {
+    id: "50",
+    title: "Velvet Night",
+    artist: "Smooth Jazz",
+    rating: 9.0,
+    audioUrl: "https://example.com/song50.mp3"
+  },
+  {
+    id: "51",
+    title: "Rapid Fire",
+    artist: "Speed Demons",
+    rating: 6.7,
+    audioUrl: "https://example.com/song51.mp3"
+  },
+  {
+    id: "52",
+    title: "Ocean Breeze",
+    artist: "Coastal Vibes",
+    rating: 8.1,
+    audioUrl: "https://example.com/song52.mp3"
+  },
+  {
+    id: "53",
+    title: "Rusty Chains",
+    artist: "Industrial Sound",
+    rating: 4.3,
+    audioUrl: "https://example.com/song53.mp3"
+  },
+  {
+    id: "54",
+    title: "Marble Halls",
+    artist: "Classic Touch",
+    rating: 7.3,
+    audioUrl: "https://example.com/song54.mp3"
+  },
+  {
+    id: "55",
+    title: "Pixel Dreams",
+    artist: "Retro Gamers",
+    rating: 8.7,
+    audioUrl: "https://example.com/song55.mp3"
+  },
+  {
+    id: "56",
+    title: "Autumn Leaves",
+    artist: "Seasonal Change",
+    rating: 6.9,
+    audioUrl: "https://example.com/song56.mp3"
+  },
+  {
+    id: "57",
+    title: "Midnight Express",
+    artist: "Night Train",
+    rating: 7.5,
+    audioUrl: "https://example.com/song57.mp3"
+  },
+  {
+    id: "58",
+    title: "Bitter Sweet",
+    artist: "Contrast",
+    rating: 5.8,
+    audioUrl: "https://example.com/song58.mp3"
+  },
+  {
+    id: "59",
+    title: "Solar Flare",
+    artist: "Sun Spot",
+    rating: 8.8,
+    audioUrl: "https://example.com/song59.mp3"
+  },
+  {
+    id: "60",
+    title: "Gentle Rain",
+    artist: "Soft Drops",
+    rating: 7.2,
+    audioUrl: "https://example.com/song60.mp3"
+  },
+  {
+    id: "61",
+    title: "Heavy Metal",
+    artist: "Iron Forge",
+    rating: 6.4,
+    audioUrl: "https://example.com/song61.mp3"
+  },
+  {
+    id: "62",
+    title: "Silk Road",
+    artist: "Eastern Promise",
+    rating: 8.3,
+    audioUrl: "https://example.com/song62.mp3"
+  },
+  {
+    id: "63",
+    title: "Broken Wings",
+    artist: "Fallen Angels",
+    rating: 5.5,
+    audioUrl: "https://example.com/song63.mp3"
+  },
+  {
+    id: "64",
+    title: "Starlight",
+    artist: "Celestial Bodies",
+    rating: 9.2,
+    audioUrl: "https://example.com/song64.mp3"
+  },
+  {
+    id: "65",
+    title: "Urban Legend",
+    artist: "City Myths",
+    rating: 7.0,
+    audioUrl: "https://example.com/song65.mp3"
+  },
+  {
+    id: "66",
+    title: "Winding Path",
+    artist: "Forest Trail",
+    rating: 6.1,
+    audioUrl: "https://example.com/song66.mp3"
+  },
+  {
+    id: "67",
+    title: "Chrome Future",
+    artist: "Tech Vision",
+    rating: 8.6,
+    audioUrl: "https://example.com/song67.mp3"
+  },
+  {
+    id: "68",
+    title: "Lost Time",
+    artist: "Memory Lane",
+    rating: 5.3,
+    audioUrl: "https://example.com/song68.mp3"
+  },
+  {
+    id: "69",
+    title: "Rising Sun",
+    artist: "Eastern Dawn",
+    rating: 9.4,
+    audioUrl: "https://example.com/song69.mp3"
+  },
+  {
+    id: "70",
+    title: "Dusty Trail",
+    artist: "Desert Wind",
+    rating: 6.6,
+    audioUrl: "https://example.com/song70.mp3"
+  },
+  {
+    id: "71",
+    title: "Electric Dreams",
+    artist: "Neon Future",
+    rating: 7.7,
+    audioUrl: "https://example.com/song71.mp3"
+  },
+  {
+    id: "72",
+    title: "Hollow Echo",
+    artist: "Empty Space",
+    rating: 4.9,
+    audioUrl: "https://example.com/song72.mp3"
+  },
+  {
+    id: "73",
+    title: "Burning Sun",
+    artist: "Heat Wave",
+    rating: 8.0,
+    audioUrl: "https://example.com/song73.mp3"
+  },
+  {
+    id: "74",
+    title: "Silver Moon",
+    artist: "Lunar Phase",
+    rating: 7.4,
+    audioUrl: "https://example.com/song74.mp3"
+  },
+  {
+    id: "75",
+    title: "Deep Dive",
+    artist: "Ocean Floor",
+    rating: 6.0,
+    audioUrl: "https://example.com/song75.mp3"
+  },
+  {
+    id: "76",
+    title: "Golden Age",
+    artist: "Vintage Sound",
+    rating: 8.5,
+    audioUrl: "https://example.com/song76.mp3"
+  },
+  {
+    id: "77",
+    title: "Fading Light",
+    artist: "Dusk Patrol",
+    rating: 5.7,
+    audioUrl: "https://example.com/song77.mp3"
+  },
+  {
+    id: "78",
+    title: "Wild Heart",
+    artist: "Free Spirit",
+    rating: 9.0,
+    audioUrl: "https://example.com/song78.mp3"
+  },
+  {
+    id: "79",
+    title: "Stone Cold",
+    artist: "Rock Solid",
+    rating: 6.5,
+    audioUrl: "https://example.com/song79.mp3"
+  },
+  {
+    id: "80",
+    title: "Endless Sky",
+    artist: "Infinite Blue",
+    rating: 8.2,
+    audioUrl: "https://example.com/song80.mp3"
   }
 ];
