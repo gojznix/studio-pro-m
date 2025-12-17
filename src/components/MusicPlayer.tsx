@@ -184,7 +184,7 @@ const MusicPlayer = () => {
 
           <Card className="bg-gradient-to-br from-zinc-900 via-neutral-900 to-stone-950 border border-zinc-700/50 shadow-2xl p-8 rounded-xl relative z-10 min-h-[85vh]">
             {/* Logo */}
-            <div className="flex justify-center mb-10">
+            <div className="flex justify-center mb-[50px]">
               <img src={studioLogo} alt="Studio Pro M" className="h-16 object-contain" />
             </div>
 
