@@ -4,6 +4,8 @@ export interface Song {
   title: string;
   artist: string;
   rating: number;
+  effectiveRating: number;
+  voteCount: number;
   audioUrl: string;
   duration: number; // seconds
 }
