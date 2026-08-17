@@ -144,26 +144,26 @@ const AdminAds = () => {
 
         <Card className="bg-zinc-900 border-zinc-700/50">
           <CardHeader>
-            <CardTitle>Nov oglas</CardTitle>
-            <CardDescription className="text-white/60">Naložite MP3 oglas in po želji pasico.</CardDescription>
+            <CardTitle className="text-white">Nov oglas</CardTitle>
+            <CardDescription className="text-zinc-400">Naložite MP3 oglas in po želji pasico.</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="title">Naslov oglasa</Label>
-                  <Input id="title" {...register("title")} className="bg-zinc-800 border-zinc-700" />
+                  <Label htmlFor="title" className="text-white">Naslov oglasa</Label>
+                  <Input id="title" {...register("title")} className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-400" />
                   {errors.title && <p className="text-sm text-red-400">{errors.title.message}</p>}
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="brand">Blagovna znamka</Label>
-                  <Input id="brand" {...register("brand")} className="bg-zinc-800 border-zinc-700" />
+                  <Label htmlFor="brand" className="text-white">Blagovna znamka</Label>
+                  <Input id="brand" {...register("brand")} className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-400" />
                   {errors.brand && <p className="text-sm text-red-400">{errors.brand.message}</p>}
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="magnitude">Ciljno število predvajanj na dan</Label>
-                <Input id="magnitude" type="number" min={1} {...register("magnitude")} className="bg-zinc-800 border-zinc-700" />
+                <Label htmlFor="magnitude" className="text-white">Ciljno število predvajanj na dan</Label>
+                <Input id="magnitude" type="number" min={1} {...register("magnitude")} className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-400" />
                 {errors.magnitude && <p className="text-sm text-red-400">{errors.magnitude.message}</p>}
               </div>
               <div className="flex items-center space-x-2">
@@ -172,18 +172,18 @@ const AdminAds = () => {
                   checked={active}
                   onCheckedChange={(checked) => setValue("active", checked === true)}
                 />
-                <Label htmlFor="active" className="cursor-pointer">Aktiven oglas</Label>
+                <Label htmlFor="active" className="cursor-pointer text-white">Aktiven oglas</Label>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="audioFile">MP3 oglas</Label>
-                <Input id="audioFile" type="file" accept="audio/mpeg" {...register("audioFile")} className="bg-zinc-800 border-zinc-700" />
+                <Label htmlFor="audioFile" className="text-white">MP3 oglas</Label>
+                <Input id="audioFile" type="file" accept="audio/mpeg" {...register("audioFile")} className="bg-zinc-800 border-zinc-700 text-white" />
                 {errors.audioFile && <p className="text-sm text-red-400">{errors.audioFile.message}</p>}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="bannerFile">Pasica (opcijsko)</Label>
-                <Input id="bannerFile" type="file" accept="image/*" {...register("bannerFile")} className="bg-zinc-800 border-zinc-700" />
+                <Label htmlFor="bannerFile" className="text-white">Pasica (opcijsko)</Label>
+                <Input id="bannerFile" type="file" accept="image/*" {...register("bannerFile")} className="bg-zinc-800 border-zinc-700 text-white" />
               </div>
-              <Button type="submit" disabled={submitting} className="bg-green-600 hover:bg-green-700">
+              <Button type="submit" disabled={submitting} className="bg-green-600 hover:bg-green-700 text-white">
                 {submitting && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
                 Dodaj oglas
               </Button>
@@ -193,7 +193,7 @@ const AdminAds = () => {
 
         <Card className="bg-zinc-900 border-zinc-700/50">
           <CardHeader>
-            <CardTitle>Seznam oglasov</CardTitle>
+            <CardTitle className="text-white">Seznam oglasov</CardTitle>
           </CardHeader>
           <CardContent>
             {loading ? (

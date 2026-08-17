@@ -115,34 +115,34 @@ const AdminMusic = () => {
 
         <Card className="bg-zinc-900 border-zinc-700/50">
           <CardHeader>
-            <CardTitle>Nova skladba</CardTitle>
-            <CardDescription className="text-white/60">Naložite MP3 datoteko in izpolnite podatke.</CardDescription>
+            <CardTitle className="text-white">Nova skladba</CardTitle>
+            <CardDescription className="text-zinc-400">Naložite MP3 datoteko in izpolnite podatke.</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="title">Naslov</Label>
-                  <Input id="title" {...register("title")} className="bg-zinc-800 border-zinc-700" />
+                  <Label htmlFor="title" className="text-white">Naslov</Label>
+                  <Input id="title" {...register("title")} className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-400" />
                   {errors.title && <p className="text-sm text-red-400">{errors.title.message}</p>}
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="artist">Izvajalec</Label>
-                  <Input id="artist" {...register("artist")} className="bg-zinc-800 border-zinc-700" />
+                  <Label htmlFor="artist" className="text-white">Izvajalec</Label>
+                  <Input id="artist" {...register("artist")} className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-400" />
                   {errors.artist && <p className="text-sm text-red-400">{errors.artist.message}</p>}
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="rating">Ocena (0-10)</Label>
-                <Input id="rating" type="number" step="0.1" min={0} max={10} {...register("rating")} className="bg-zinc-800 border-zinc-700" />
+                <Label htmlFor="rating" className="text-white">Ocena (0-10)</Label>
+                <Input id="rating" type="number" step="0.1" min={0} max={10} {...register("rating")} className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-400" />
                 {errors.rating && <p className="text-sm text-red-400">{errors.rating.message}</p>}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="audioFile">MP3 datoteka</Label>
-                <Input id="audioFile" type="file" accept="audio/mpeg" {...register("audioFile")} className="bg-zinc-800 border-zinc-700" />
+                <Label htmlFor="audioFile" className="text-white">MP3 datoteka</Label>
+                <Input id="audioFile" type="file" accept="audio/mpeg" {...register("audioFile")} className="bg-zinc-800 border-zinc-700 text-white" />
                 {errors.audioFile && <p className="text-sm text-red-400">{errors.audioFile.message}</p>}
               </div>
-              <Button type="submit" disabled={submitting} className="bg-green-600 hover:bg-green-700">
+              <Button type="submit" disabled={submitting} className="bg-green-600 hover:bg-green-700 text-white">
                 {submitting && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
                 Dodaj skladbo
               </Button>
@@ -152,7 +152,7 @@ const AdminMusic = () => {
 
         <Card className="bg-zinc-900 border-zinc-700/50">
           <CardHeader>
-            <CardTitle>Knjižnica skladb</CardTitle>
+            <CardTitle className="text-white">Knjižnica skladb</CardTitle>
           </CardHeader>
           <CardContent>
             {loading ? (
