@@ -1,34 +1,42 @@
-# Music upload for admins
+# Admin uploads for music and ads, with real playback
 
 ## Current state
-The player is fully static: songs and ads come from hardcoded files (`src/data/songs.ts`, `src/data/advertisements.ts`), play counts live in localStorage, and there is no real audio playback — a timer just counts down 180s per track. The backend is empty: no tables, no storage buckets, no users.
+Everything in the player is fake. Songs live in `src/data/songs.ts` and ads in `src/data/advertisements.ts`, both hardcoded with `https://example.com/...` audio URLs. Nothing is ever played: `MusicPlayer.tsx` runs a countdown timer (fixed 180s for songs, `duration` for ads) and `ProgressIndicator` draws the bar from that timer. `AdBanner` ignores `bannerUrl` and renders a placeholder box. Play counts live in localStorage. The backend is empty — no tables, no storage buckets, no users.
 
 ## What we build
 
 ### 1. Backend foundation
-- `profiles` table (id -> auth user id, email, display name) with an auto-create trigger on signup.
-- `user_roles` table plus an `app_role` enum and a `has_role()` security-definer function (roles kept out of profiles for safety).
-- `songs` table: title, artist, rating, storage path, duration, uploaded_by, created_at.
-  - Public read (everyone hears the shared library), insert/update/delete restricted to admins.
-- Private `songs` storage bucket for the audio files, with admin-only write and read access granted through signed URLs so files aren't openly hotlinkable.
+- `profiles` table (linked to the auth user, email + display name) with an auto-create trigger on signup.
+- `user_roles` table with an `app_role` enum and a `has_role()` security-definer function (roles kept out of profiles for safety).
+- `songs` table: title, artist, rating, audio path, duration, uploaded_by, created_at.
+- `advertisements` table: title, brand, audio path, banner image path, duration, magnitude (target plays per 24h), active flag, created_at.
+- Both tables: public read (shared station), insert/update/delete for admins only.
+- Storage buckets: `audio` (mp3 files, private, admin write, played via signed URLs) and `ad-banners` (public images).
 
 ### 2. Auth
-- Email + password sign-in/sign-up at `/auth`, session listener wired at app level.
-- The first account can be promoted to admin manually; afterwards admins can grant the role.
-- Header shows sign-in / sign-out and an "Upload" link visible only to admins.
+- Email + password sign-up/sign-in at `/auth`, session listener wired at app level.
+- Your account gets the admin role; further admins can be granted from the app later.
+- Header shows sign-in/out plus admin-only links to the two upload pages.
 
-### 3. Upload page (`/upload`, admin-only)
-- Protected route: redirects non-admins away.
-- Form: audio file picker (mp3/wav, size limit), title, artist, rating (0-10 slider), validated with zod.
-- Uploads the file to storage, then inserts the song row; shows progress and errors.
-- Below the form: a list of uploaded songs with delete, so the library is manageable.
+### 3. Music upload page (`/admin/music`)
+- Admin-only route.
+- Form: mp3 file only (validated by extension and MIME type, with a size limit), title, artist, rating 0-10 — validated with zod.
+- Duration read from the file in the browser before upload and stored with the row, so the player no longer guesses 180s.
+- Uploads to storage, inserts the song row, shows progress and errors.
+- List of existing songs below with delete (removes row and file).
 
-### 4. Player switches to the real library
-- Player loads songs from the database instead of `src/data/songs.ts` (that file gets removed).
-- Signed playback URLs are resolved per track and played through a real `<audio>` element, so duration and progress come from the actual file rather than a fixed 180s timer.
-- Rating-weighted selection logic stays as it is; ads remain hardcoded for now.
-- Empty state when no songs are uploaded yet.
+### 4. Ads upload page (`/admin/ads`)
+- Same admin-only pattern.
+- Form: mp3 audio, optional banner image, title, brand, magnitude (target plays per 24h), active toggle. Duration read from the mp3.
+- List of existing ads with active toggle and delete.
+
+### 5. Real playback
+- Replace the countdown simulation with a real `<audio>` element: play/pause/next drive the element, progress and time remaining come from `timeupdate`, and `ended` triggers auto-advance.
+- Tracks resolve to signed storage URLs before playing.
+- `ProgressIndicator` and `AdBanner` read the true duration; `AdBanner` shows the uploaded banner image when present.
+- Player loads songs and ads from the database; `src/data/songs.ts` and `src/data/advertisements.ts` are removed. Rating-weighted song selection and ad-magnitude priority logic stay as they are, just fed by real data.
+- Empty state when nothing has been uploaded yet, and a first-click unmute prompt since browsers block autoplay with sound.
 
 ## Notes
-- Play tracking stays in localStorage for this step; moving it to the database can be a follow-up.
-- Ads are untouched in this pass; an ad upload page can reuse the same pattern later.
+- Play tracking stays in localStorage for this step; moving counts to the database can be a follow-up.
+- Only mp3 is accepted for both songs and ads, as requested.
