@@ -1,4 +1,5 @@
 import { Song, Advertisement } from "@/types/music";
+import SongRating from "./SongRating";
 
 interface PlayerHeaderProps {
   currentContent: Song | Advertisement | null;
@@ -19,9 +20,17 @@ const PlayerHeader = ({ currentContent, isAdvertisement }: PlayerHeaderProps) =>
           : "Nalaganje naslednje glasbe..."}
       </p>
       {currentContent && !isAdvertisement && (
-        <div className="flex items-center justify-center space-x-2 mt-1">
-          <span className="text-yellow-400 font-medium">Ocena:</span>
-          <span className="text-white font-bold">{(currentContent as Song).rating.toFixed(1)}</span>
+        <div className="flex flex-col items-center gap-3 mt-1">
+          <div className="flex items-center justify-center space-x-2">
+            <span className="text-yellow-400 font-medium">Ocena:</span>
+            <span className="text-white font-bold">
+              {(currentContent as Song).effectiveRating.toFixed(1)}
+            </span>
+            <span className="text-zinc-400 text-sm">
+              ({(currentContent as Song).voteCount} glasov)
+            </span>
+          </div>
+          <SongRating songId={currentContent.id} />
         </div>
       )}
     </div>

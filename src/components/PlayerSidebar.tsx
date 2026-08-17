@@ -55,7 +55,7 @@ const PlayerSidebar = ({ isAutoPlaying, playTracker, songs, advertisements }: Pl
         <h3 className="text-xl font-semibold text-white/90">TOP Skladbe</h3>
         <div className="max-h-[320px] overflow-y-auto pr-1 scrollbar-thin">
           {songs
-            .filter((song) => song.rating >= 8.5)
+            .filter((song) => song.effectiveRating >= 8.5)
             .slice(0, 10)
             .map((song) => {
               const plays = playTracker.songPlays[song.id] || 0;
@@ -75,7 +75,7 @@ const PlayerSidebar = ({ isAutoPlaying, playTracker, songs, advertisements }: Pl
                     </div>
                     <div className="flex items-center space-x-1 bg-black/30 px-2 py-1 rounded-full">
                       <span className="text-yellow-400 font-medium text-sm">★</span>
-                      <span className="text-white font-bold text-sm">{song.rating.toFixed(1)}</span>
+                      <span className="text-white font-bold text-sm">{song.effectiveRating.toFixed(1)}</span>
                     </div>
                   </div>
                 </div>
