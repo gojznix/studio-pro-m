@@ -31,7 +31,7 @@ const AdBanner = ({ advertisement, currentTime }: AdBannerProps) => {
         </div>
 
         <div className="text-right">
-          <div className="text-white/90 text-sm">{remaining}s do konca</div>
+          <div className="text-white/90 text-sm">{Math.ceil(remaining)}s do konca</div>
           <div className="w-32 bg-white/20 rounded-full h-2 mt-1">
             <div
               className="bg-green-400 h-2 rounded-full transition-all duration-200"
