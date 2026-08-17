@@ -3,6 +3,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useAdmin } from "@/hooks/useAdmin";
 import { Button } from "@/components/ui/button";
 import { LogIn, LogOut, Music, Radio } from "lucide-react";
+import studioLogo from "@/assets/studio-logo.png";
 
 export const Header = () => {
   const { user, signOut } = useAuth();
@@ -10,8 +11,12 @@ export const Header = () => {
 
   return (
     <header className="flex items-center justify-between py-4 px-6 bg-zinc-900/80 border-b border-zinc-700/50">
-      <Link to="/" className="text-white font-bold text-lg tracking-wide hover:text-green-400 transition-colors">
-        STUDIO Pro M
+      <Link to="/" className="block">
+        <img
+          src={studioLogo}
+          alt="Studio Pro M"
+          className="h-10 object-contain animate-logo-glow drop-shadow-[0_0_15px_rgba(74,222,128,0.5)]"
+        />
       </Link>
       <nav className="flex items-center gap-4">
         {isAdmin && (
