@@ -79,7 +79,7 @@ const MusicPlayer = () => {
 
   // Auto-play timer effect
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval> | null = null;
 
     if (isPlaying && timeRemaining > 0) {
       interval = setInterval(() => {
