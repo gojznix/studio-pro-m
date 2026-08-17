@@ -37,7 +37,7 @@ export const Header = () => {
             variant="outline"
             size="sm"
             onClick={signOut}
-            className="bg-transparent text-white border-white/30 hover:bg-white/10"
+            className="bg-transparent text-red-400 border-red-500/50 hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors"
           >
             <LogOut className="h-4 w-4 mr-2" />
             Odjava
@@ -47,7 +47,7 @@ export const Header = () => {
             <Button
               variant="outline"
               size="sm"
-              className="bg-transparent text-white border-white/30 hover:bg-white/10"
+              className="bg-transparent text-green-400 border-green-500/50 hover:bg-green-600 hover:text-white hover:border-green-600 transition-colors"
             >
               <LogIn className="h-4 w-4 mr-2" />
               Prijava
