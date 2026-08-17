@@ -242,10 +242,7 @@ const MusicPlayer = () => {
   return (
     <div
       className="min-h-screen p-4 bg-cover bg-center relative overflow-hidden"
-      style={{
-        backgroundImage: "url('https://source.unsplash.com/1600x900/?dark,forest,abstract')",
-        backgroundPosition: "center",
-      }}
+      style={{ backgroundPosition: "center" }}
     >
       <div
         className="absolute inset-0 bg-[#0d1f15]/80 -z-10"
