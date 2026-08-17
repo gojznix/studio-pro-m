@@ -74,6 +74,41 @@ export type Database = {
         }
         Relationships: []
       }
+      song_ratings: {
+        Row: {
+          created_at: string
+          id: string
+          rating: number
+          song_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          rating: number
+          song_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          rating?: number
+          song_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "song_ratings_song_id_fkey"
+            columns: ["song_id"]
+            isOneToOne: false
+            referencedRelation: "songs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       songs: {
         Row: {
           artist: string
@@ -127,7 +162,22 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      song_rating_stats: {
+        Row: {
+          avg_rating: number | null
+          song_id: string | null
+          vote_count: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "song_ratings_song_id_fkey"
+            columns: ["song_id"]
+            isOneToOne: false
+            referencedRelation: "songs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
       has_role: {
