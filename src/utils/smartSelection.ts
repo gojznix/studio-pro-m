@@ -5,9 +5,11 @@ export const getNextSong = (songs: Song[]): Song => {
   const eligibleSongs = songs.filter((song) => {
     const random = Math.random() * 100;
 
-    if (song.effectiveRating >= 8.5) {
+    const rating = song.effectiveRating ?? song.rating ?? 0;
+
+    if (rating >= 8.5) {
       return random <= 70; // 70% chance for high-rated songs
-    } else if (song.effectiveRating >= 5) {
+    } else if (rating >= 5) {
       return random <= 25; // 25% chance for medium-rated songs
     }
     return false; // Low-rated songs handled by fallback
