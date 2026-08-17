@@ -24,10 +24,10 @@ const PlayerHeader = ({ currentContent, isAdvertisement }: PlayerHeaderProps) =>
           <div className="flex items-center justify-center space-x-2">
             <span className="text-yellow-400 font-medium">Ocena:</span>
             <span className="text-white font-bold">
-              {(currentContent as Song).effectiveRating.toFixed(1)}
+              {((currentContent as Song).effectiveRating ?? (currentContent as Song).rating ?? 0).toFixed(1)}
             </span>
             <span className="text-zinc-400 text-sm">
-              ({(currentContent as Song).voteCount} glasov)
+              ({(currentContent as Song).voteCount ?? 0} glasov)
             </span>
           </div>
           <SongRating songId={currentContent.id} />
