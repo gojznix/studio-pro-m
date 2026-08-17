@@ -37,7 +37,7 @@ export const Header = () => {
             variant="outline"
             size="sm"
             onClick={signOut}
-            className="text-white border-white/30 hover:bg-white/10"
+            className="bg-transparent text-white border-white/30 hover:bg-white/10"
           >
             <LogOut className="h-4 w-4 mr-2" />
             Odjava
@@ -47,7 +47,7 @@ export const Header = () => {
             <Button
               variant="outline"
               size="sm"
-              className="text-white border-white/30 hover:bg-white/10"
+              className="bg-transparent text-white border-white/30 hover:bg-white/10"
             >
               <LogIn className="h-4 w-4 mr-2" />
               Prijava
