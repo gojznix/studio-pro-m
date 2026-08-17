@@ -20,7 +20,7 @@ export const getSignedBannerUrl = async (path: string): Promise<string> => {
 };
 
 export const fetchSongs = async (): Promise<Song[]> => {
-  const { data, error } = await (supabase.from("songs") as any).select("*");
+  const { data, error } = await ((supabase as any).from("songs")).select("*");
   if (error) throw error;
 
   const rows: DbSong[] = data || [];
@@ -37,7 +37,7 @@ export const fetchSongs = async (): Promise<Song[]> => {
 };
 
 export const fetchAdvertisements = async (): Promise<Advertisement[]> => {
-  const { data, error } = await (supabase.from("advertisements") as any)
+  const { data, error } = await ((supabase as any).from("advertisements"))
     .select("*")
     .eq("active", true);
   if (error) throw error;

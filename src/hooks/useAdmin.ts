@@ -15,9 +15,9 @@ export const useAdmin = () => {
       return;
     }
 
-    supabase
+    (supabase as any)
       .rpc("has_role", { _user_id: user.id, _role: "admin" })
-      .then(({ data, error }) => {
+      .then(({ data, error }: { data: boolean | null; error: Error | null }) => {
         setIsAdmin(!!data && !error);
         setLoading(false);
       });
