@@ -1,13 +1,13 @@
-import { PlayTracker } from "@/types/music";
-import { advertisements } from "@/data/advertisements";
-import { songs } from "@/data/songs";
+import { PlayTracker, Song, Advertisement } from "@/types/music";
 
 interface PlayerSidebarProps {
   isAutoPlaying: boolean;
   playTracker: PlayTracker;
+  songs: Song[];
+  advertisements: Advertisement[];
 }
 
-const PlayerSidebar = ({ isAutoPlaying, playTracker }: PlayerSidebarProps) => {
+const PlayerSidebar = ({ isAutoPlaying, playTracker, songs, advertisements }: PlayerSidebarProps) => {
   return (
     <div className="space-y-6">
       {/* Auto-Play Status */}

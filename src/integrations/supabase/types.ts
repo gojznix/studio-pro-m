@@ -14,16 +14,132 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      advertisements: {
+        Row: {
+          active: boolean
+          audio_path: string
+          banner_path: string | null
+          brand: string
+          created_at: string | null
+          duration: number
+          id: string
+          magnitude: number
+          title: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          active?: boolean
+          audio_path: string
+          banner_path?: string | null
+          brand: string
+          created_at?: string | null
+          duration: number
+          id?: string
+          magnitude?: number
+          title: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          active?: boolean
+          audio_path?: string
+          banner_path?: string | null
+          brand?: string
+          created_at?: string | null
+          duration?: number
+          id?: string
+          magnitude?: number
+          title?: string
+          uploaded_by?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string | null
+          display_name: string | null
+          email: string | null
+          id: string
+        }
+        Insert: {
+          created_at?: string | null
+          display_name?: string | null
+          email?: string | null
+          id: string
+        }
+        Update: {
+          created_at?: string | null
+          display_name?: string | null
+          email?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      songs: {
+        Row: {
+          artist: string
+          audio_path: string
+          created_at: string | null
+          duration: number
+          id: string
+          rating: number
+          title: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          artist: string
+          audio_path: string
+          created_at?: string | null
+          duration: number
+          id?: string
+          rating: number
+          title: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          artist?: string
+          audio_path?: string
+          created_at?: string | null
+          duration?: number
+          id?: string
+          rating?: number
+          title?: string
+          uploaded_by?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +266,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const
